@@ -1,0 +1,9 @@
+{
+	"clients": [
+		{
+			"id": "1",
+			"type": "whatsapp",
+			"name": "Aliyss"
+		}
+	]
+}

@@ -1,0 +1,7 @@
+{
+  "name": "aliyss",
+  "version": "1.0.0",
+  "dependencies": {
+    "whatsapp-web.js": "^1.0.2"
+  }
+}
