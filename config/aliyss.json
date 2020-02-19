@@ -3,7 +3,12 @@
 		{
 			"id": "1",
 			"type": "whatsapp",
-			"name": "Aliyss"
+			"name": "Aliyss",
+			"config": {
+				"browser": {
+					"headless": false
+				}
+			}
 		}
 	]
 }
