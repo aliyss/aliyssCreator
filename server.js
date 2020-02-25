@@ -20,7 +20,7 @@ let _instances = [];
 
 (async () => {
 	for (let i = 0; i < _clients.length; i++) {
-		if (_clients[i].type) {
+		if (_clients[i].type && _clients[i].enabled) {
 			if (!_clients[i].folder) {
 				_clients[i].folder = aliyss.folders.auth
 			}

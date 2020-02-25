@@ -2,6 +2,8 @@
   "name": "aliyss",
   "version": "1.0.0",
   "dependencies": {
+    "discord.js": "git+https://github.com/discordjs/discord.js.git",
+    "telegraf": "^3.36.0",
     "whatsapp-web.js": "git+https://github.com/pedroslopez/whatsapp-web.js.git"
   }
 }

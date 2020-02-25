@@ -2,12 +2,42 @@
 	"clients": [
 		{
 			"id": "1",
+			"enabled": false,
 			"type": "whatsapp",
-			"name": "Aliyss",
+			"name": "aliyss",
 			"config": {
 				"browser": {
 					"headless": false
 				}
+			},
+			"events": {
+				"ignored": [
+					"message"
+				]
+			}
+		},
+		{
+			"id": "2",
+			"enabled": true,
+			"type": "discord",
+			"name": "aliyss",
+			"config": {
+			},
+			"events": {
+				
+			}
+		},
+		{
+			"id": "3",
+			"enabled": true,
+			"type": "telegram",
+			"name": "aliyss",
+			"config": {
+			},
+			"events": {
+				"ignored": [
+					
+				]
 			}
 		}
 	],
