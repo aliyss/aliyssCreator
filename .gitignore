@@ -1,4 +1,6 @@
 /node_modules/
 /package-lock.json
 /.idea/
-/config/auth/
+/config/database/
+/aliyssDatabase/databaseAuthentication.json
+/aliyssDatabase/databaseAuthentication.json

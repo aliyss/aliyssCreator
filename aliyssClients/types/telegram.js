@@ -2,9 +2,17 @@ const Telegraf = require('telegraf')
 
 
 exports.add = (_config) => {
-	return new Telegraf(_config.auth.token)
+	try {
+		return new Telegraf(_config.auth.token)
+	} catch (e) {
+		console.error(`[Telegram] ${e.message}`)
+	}
 }
 
-exports.start = (_client, _config) => {
-	_client.launch()
+exports.start = async (_client) => {
+	try {
+		await _client.launch()
+	} catch (e) {
+		console.error(`[Telegram] ${e.message}`)
+	}
 }

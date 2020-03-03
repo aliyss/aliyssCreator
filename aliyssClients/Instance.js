@@ -1,4 +1,5 @@
 const fs = require("fs")
+const { databaseInput } = require("./../aliyssDatabase")
 
 class Instance {
 	
@@ -7,52 +8,65 @@ class Instance {
 		this.name = _client.name;
 		this.type = _client.type;
 		this.config = _client.config;
-		this.folder = _client.folder;
+		this.events = _client.events;
+		this.db_init = _client.db_init;
+		this.database = _client.database;
 
 		this.modula = require("./types/" + this.type + ".js");
 		
-		if (_client.events) {
-			this._events = _client.events;
+		if (!this.config) {
+			this.config = {}
 		}
 		
-		try {
-			if (!this.config.auth) {
-				this.config.auth = require(this.folder + this.id + ".json")
-			}
-		} catch (e) {
-			console.log(`AuthenticationFile does not exist. Login manually.`);
+		if (!this.events) {
+			this.events = {}
 		}
 		
-		this.client = this.addClient()
+		if (!this.events.ignored) {
+			this.events.ignored = []
+		}
+		
+		if (!this.database) {
+			this.database = databaseInput.databaseFull(this.db_init)
+		}
+		
 	}
 
-	addClient = (config=this.config) => {
-		return this.modula.add(config)
+	addClient = async (config=this.config) => {
+		return await this.modula.add(config)
 	}
-	
-	start = async (client=this.client) => {
-		this.modula.start(client, this.config)
-	}
-	
-	saveAuth = async (auth = {}) => {
-		let saveLocation = this.folder + this.id + ".json"
-		await fs.writeFile(saveLocation, JSON.stringify(auth, null, 4), function (err) {
-			if (err) throw err;
-			console.log(`AuthenticationFile saved: ${saveLocation}`);
-		});
-	}
-	
-	disableEvents = (client=this.client, ignoredEvents) => {
-		if (!ignoredEvents) {
-			ignoredEvents = this._events && this._events.ignored ? this._events.ignored : [];
+
+	addAuth = async () => {
+		if (!this.config.auth) {
+			return await this.database.getData(this.db_init.folder + "auth", true)
 		}
+	}
+	
+	addLayout = async () => {
+		if (!this.config.layout) {
+			return await this.database.getData(this.db_init.folder + "layout", true)
+		}
+	}
+	
+	start = async () => {
+		this.config.auth = await this.addAuth()
+		this.config.layout = await this.addLayout()
+		this.client = await this.addClient()
+		await this.modula.start(this.client, this.config)
+	}
+	
+	saveAuth = async (auth = this.config.auth) => {
+		this.config.auth = auth;
+		await this.database.addData(this.db_init.folder + "auth", this.config.auth)
+	}
+	
+	disableEvents = (client=this.client, ignoredEvents=this.events.ignored) => {
 		for (let i = 0; i < ignoredEvents.length; i++) {
 			try {
 				client.removeAllListeners(ignoredEvents[i]);
 			} catch (e) {
 				console.log(`IgnoredEvents of ${this.name} with ${ignoredEvents[i]}:`, e)
 			}
-			
 		}
 	}
 	

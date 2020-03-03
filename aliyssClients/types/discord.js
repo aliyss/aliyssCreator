@@ -5,6 +5,10 @@ exports.add = (_config) => {
 	return new Discord.Client();
 }
 
-exports.start = (_client, _config) => {
-	_client.login(_config.auth.token);
+exports.start = async (_client, _config) => {
+	try {
+		await _client.login(_config.auth.token);
+	} catch (e) {
+		console.error(`[Discord] ${e.message}`)
+	}
 }
