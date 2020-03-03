@@ -2,12 +2,13 @@
 	"clients": [
 		{
 			"id": "1",
-			"enabled": false,
+			"enabled": true,
 			"type": "whatsapp",
 			"name": "aliyss",
 			"config": {
 				"browser": {
-					"headless": false
+					"headless": false,
+					"defaultViewport": null
 				}
 			},
 			"events": {
@@ -20,28 +21,18 @@
 			"id": "2",
 			"enabled": true,
 			"type": "discord",
-			"name": "aliyss",
-			"config": {
-			},
-			"events": {
-				
-			}
+			"name": "aliyss"
 		},
 		{
 			"id": "3",
 			"enabled": true,
 			"type": "telegram",
-			"name": "aliyss",
-			"config": {
-			},
-			"events": {
-				"ignored": [
-					
-				]
-			}
+			"name": "aliyss"
 		}
 	],
-	"folders": {
-		"auth": ""
+	"db_init": {
+		"type": "firebase",
+		"init": true,
+		"cleanPath": "./config\\database"
 	}
 }
