@@ -2,13 +2,20 @@
 	"name": "aliyss",
 	"version": "1.0.1",
 	"dependencies": {
+		"@vitalets/google-translate-api": "^3.0.0",
 		"deepmerge": "^4.2.2",
 		"discord.js": "git+https://github.com/discordjs/discord.js.git",
 		"firebase-admin": "^8.9.2",
 		"glob": "^7.1.6",
 		"puppeteer": "^2.1.1",
+		"tabletojson": "git+https://github.com/maugenst/tabletojson.git#316ba7992c60677e8847ae6f037eca1f3f5a3549",
 		"telegraf": "^3.36.0",
 		"treeify": "^1.1.0",
+		"weather-js": "^2.0.0",
 		"whatsapp-web.js": "git+https://github.com/pedroslopez/whatsapp-web.js.git"
+	},
+	"devDependencies": {
+		"@types/cheerio": "^0.22.16",
+		"node-watch": "^0.6.3"
 	}
 }
