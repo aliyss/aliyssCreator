@@ -31,9 +31,11 @@ let _instances = [];
 	
 	for (let i = 0; i < _clients.length; i++) {
 		if (_clients[i].type && _clients[i].enabled) {
+			
 			if (!_clients[i].db_init) {
 				_clients[i].db_init = db_config.db_init
 			}
+			
 			_clients[i].db_init = await databaseInput.configCheck(_clients[i].db_init, configFolder, _clients[i].id)
 			
 			let instance = new Instance(_clients[i])

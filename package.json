@@ -1,10 +1,16 @@
 {
-  "name": "aliyss",
-  "version": "1.0.0",
-  "dependencies": {
-    "discord.js": "git+https://github.com/discordjs/discord.js.git",
-    "firebase-admin": "^8.9.2",
-    "telegraf": "^3.36.0",
-    "whatsapp-web.js": "git+https://github.com/pedroslopez/whatsapp-web.js.git"
-  }
+	"name": "aliyss",
+	"version": "1.0.0",
+	"dependencies": {
+		"deepmerge": "^4.2.2",
+		"discord.js": "git+https://github.com/discordjs/discord.js.git",
+		"firebase-admin": "^8.9.2",
+		"glob": "^7.1.6",
+		"puppeteer": "^2.1.1",
+		"request": "^2.88.2",
+		"tabletojson": "^1.2.0",
+		"telegraf": "^3.36.0",
+		"treeify": "^1.1.0",
+		"whatsapp-web.js": "git+https://github.com/pedroslopez/whatsapp-web.js.git"
+	}
 }

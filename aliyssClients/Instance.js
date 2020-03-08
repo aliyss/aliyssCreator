@@ -5,7 +5,7 @@ class Instance {
 	
 	constructor(_client) {
 		this.id = _client.id;
-		this.name = _client.name;
+		this.name = _client.name ? _client.name : _client.id;
 		this.type = _client.type;
 		this.config = _client.config;
 		this.events = _client.events;
@@ -50,7 +50,7 @@ class Instance {
 	
 	start = async () => {
 		this.config.auth = await this.addAuth()
-		this.config.layout = await this.addLayout()
+		this.layout = await this.addLayout()
 		this.client = await this.addClient()
 		await this.modula.start(this.client, this.config)
 	}
