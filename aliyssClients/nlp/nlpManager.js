@@ -1,13 +1,34 @@
-const { NlpManager } = require("node-nlp");
+const {dock} = require("@nlpjs/basic");
 
-exports.addNLP = async (_data, _instanceId) => {
-	//const _dock = await dock.createContainer(_instanceId, {nlu: { log: false } });
-	const nlp = new NlpManager({ nlu: {log: false } }) //_dock.get('nlp');
-	for (let i = 0; i < _data.length; i++) {
-		await nlp.nlp.addCorpus(_data[i].data())
+exports.addNLP = async (_data, _instance) => {
+	let useData = [
+		'Basic',
+		{ "className": "BuiltinMicrosoft", "name": "extract-builtin-??", "path": "@nlpjs/builtin-microsoft" },
+		{ "className": "LangEn", path: "@nlpjs/lang-en"}
+	]
+	
+	if (_instance.layout.nlp.useData) {
+		useData = _instance.layout.nlp.useData
 	}
+	
+	const _dock = await dock.createContainer(_instance.id, {
+		use:  useData,
+		settings: {
+			nlp: {
+				log: false,
+			},
+		},
+	});
+	
+	const nlp = _dock.get('nlp');
+	for (let i = 0; i < _data.length; i++) {
+		await this.addNLPCorpus(nlp, _data[i].data())
+	}
+	
 	await this.trainNLP(nlp)
-	console.log(`[${_instanceId}] NlpManager: Epochs loaded.`)
+	
+	console.log(`[${_instance.id}] NlpManager: Epochs loaded.`)
+	
 	return nlp
 }
 

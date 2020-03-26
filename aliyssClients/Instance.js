@@ -56,19 +56,48 @@ class Instance {
 	addNLP = async () => {
 		if (!this.nlp) {
 			let _nlpData = await this.database.getData(this.db_init.folder + "nlpData/default")
-			return nlpManager.addNLP(_nlpData, this.id)
+			return nlpManager.addNLP(_nlpData, this)
 		}
 	}
 
 	addUsers = async () => {
 		if (!this.users) {
-			let _users = {}
-			let users = await this.database.getData(this.db_init.folder + "layout/users", true)
-			for (let i = 0; i < users.length; i++) {
-				_users[users[i].id] = await users[i].data();
-			}
-			return _users
+			return {}
 		}
+	}
+
+	addChannels = async () => {
+		if (!this.channels) {
+			return {}
+		}
+	}
+
+	getUser = async (user_id, data=false) => {
+		if (!this.users[user_id]) {
+			if (data) {
+				data = JSON.parse(JSON.stringify(data))
+				delete data.author
+			}
+			let _user = await this.database.getData(this.db_init.folder + "layout/users/" + user_id, data)
+			if (_user) {
+				this.users[user_id] = _user;
+			}
+		}
+		return this.users[user_id]
+	}
+
+	getChannel = async (channel_id, data=false) => {
+		if (!this.channels[channel_id]) {
+			if (data) {
+				data = JSON.parse(JSON.stringify(data))
+				delete data.channel
+			}
+			let _channel = await this.database.getData(this.db_init.folder + "layout/channels/" + channel_id, data)
+			if (_channel) {
+				this.channels[channel_id] = _channel;
+			}
+		}
+		return this.channels[channel_id]
 	}
 
 	start = async () => {
@@ -81,6 +110,10 @@ class Instance {
 		if (!this.users) {
 			this.users = {}
 		}
+		this.channels = await this.addChannels()
+		if (!this.channels) {
+			this.channels = {}
+		}
 		this.client = await this.addClient()
 		await this.modula.start(this.client, this.config)
 	}
@@ -90,7 +123,7 @@ class Instance {
 		await this.database.addData(this.db_init.folder + "auth", this.config.auth)
 	}
 	
-	saveData = async (_path, _data) => {
+	saveUsers = async (_path, _data) => {
 		if (!_path && !_data) {
 			let errors = []
 			for (let [key, value] of Object.entries(this.users)) {
@@ -118,8 +151,6 @@ class Instance {
 			}
 		}
 	}
-
-	addContext = nlpManager.Context
 
 }
 
