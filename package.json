@@ -4,6 +4,7 @@
 	"dependencies": {
 		"@nlpjs/basic": "^4.2.1",
 		"@vitalets/google-translate-api": "^3.0.0",
+		"cron": "^1.8.2",
 		"deepmerge": "^4.2.2",
 		"discord.js": "git+https://github.com/discordjs/discord.js.git",
 		"firebase-admin": "^8.9.2",
