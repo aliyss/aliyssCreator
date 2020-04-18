@@ -1,6 +1,6 @@
 /node_modules/
 /package-lock.json
-/.idea/
-/config/database/
-/aliyssDatabase/databaseAuthentication.json
-/model.nlp
+
+
+/config/keys/databaseAuthentication.json
+/config/keys/googleAuthentication.json

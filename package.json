@@ -2,21 +2,23 @@
 	"name": "aliyss",
 	"version": "1.0.1",
 	"dependencies": {
-		"@nlpjs/basic": "^4.2.1",
+		"@nlpjs/basic": "^4.3.0",
 		"@vitalets/google-translate-api": "^3.0.0",
+		"compromise": "^13.1.1",
 		"cron": "^1.8.2",
 		"deepmerge": "^4.2.2",
 		"discord.js": "git+https://github.com/discordjs/discord.js.git",
 		"firebase-admin": "^8.9.2",
 		"glob": "^7.1.6",
-		"node-nlp": "^4.2.1",
+		"googleapis": "^49.0.0",
+		"keybase-bot": "^3.6.1",
+		"node-nlp": "^4.3.0",
 		"puppeteer": "^2.1.1",
-		"tabletojson": "git+https://github.com/maugenst/tabletojson.git#316ba7992c60677e8847ae6f037eca1f3f5a3549",
 		"telegraf": "^3.36.0",
 		"treeify": "^1.1.0",
+		"unzalgo": "^2.1.2",
 		"weather-js": "^2.0.0",
-		"whatsapp-web.js": "git+https://github.com/pedroslopez/whatsapp-web.js.git",
-		"wink-sentiment": "^5.0.2"
+		"whatsapp-web.js": "git+https://github.com/pedroslopez/whatsapp-web.js.git"
 	},
 	"devDependencies": {
 		"@types/cheerio": "^0.22.16",

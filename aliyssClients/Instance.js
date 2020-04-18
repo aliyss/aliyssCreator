@@ -72,6 +72,12 @@ class Instance {
 		}
 	}
 
+	addChannelGroups = async () => {
+		if (!this.channelGroups) {
+			return {}
+		}
+	}
+
 	getUser = async (user_id, data=false) => {
 		if (!this.users[user_id]) {
 			if (data) {
@@ -99,6 +105,20 @@ class Instance {
 		}
 		return this.channels[channel_id]
 	}
+	
+	getChannelGroup = async (channelGroup_id, data=false) => {
+		if (!this.channelGroups[channelGroup_id]) {
+			if (data) {
+				data = JSON.parse(JSON.stringify(data))
+				delete data.channelGroup
+			}
+			let _channelGroup = await this.database.getData(this.db_init.folder + "layout/channelGroups/" + channelGroup_id, data)
+			if (_channelGroup) {
+				this.channelGroups[channelGroup_id] = _channelGroup;
+			}
+		}
+		return this.channelGroups[channelGroup_id]
+	}
 
 	start = async () => {
 		this.config.auth = await this.addAuth()
@@ -113,6 +133,10 @@ class Instance {
 		this.channels = await this.addChannels()
 		if (!this.channels) {
 			this.channels = {}
+		}
+		this.channelGroups = await this.addChannelGroups()
+		if (!this.channelGroups) {
+			this.channelGroups = {}
 		}
 		this.client = await this.addClient()
 		await this.modula.start(this.client, this.config)

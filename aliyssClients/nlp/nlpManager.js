@@ -13,6 +13,7 @@ exports.addNLP = async (_data, _instance) => {
 	
 	const _dock = await dock.createContainer(_instance.id, {
 		use:  useData,
+		log: false,
 		settings: {
 			nlp: {
 				log: false,
