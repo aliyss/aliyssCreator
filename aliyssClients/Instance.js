@@ -82,11 +82,12 @@ class Instance {
 		if (!this.users[user_id]) {
 			if (data) {
 				data = JSON.parse(JSON.stringify(data))
+				this.users[user_id] = { ...data }
 				delete data.author
 			}
 			let _user = await this.database.getData(this.db_init.folder + "layout/users/" + user_id, data)
 			if (_user) {
-				this.users[user_id] = _user;
+				this.users[user_id] = { ...this.users[user_id], ..._user };
 			}
 		}
 		return this.users[user_id]

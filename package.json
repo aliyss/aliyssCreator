@@ -4,10 +4,12 @@
 	"dependencies": {
 		"@nlpjs/basic": "^4.3.0",
 		"@vitalets/google-translate-api": "^3.0.0",
+		"asciichart": "^1.5.19",
 		"compromise": "^13.1.1",
 		"cron": "^1.8.2",
 		"deepmerge": "^4.2.2",
 		"discord.js": "git+https://github.com/discordjs/discord.js.git",
+		"express": "^4.17.1",
 		"firebase-admin": "^8.9.2",
 		"glob": "^7.1.6",
 		"googleapis": "^49.0.0",
