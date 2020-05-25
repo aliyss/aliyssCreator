@@ -1,6 +1,6 @@
 const {dock} = require("@nlpjs/basic");
 
-exports.addNLP = async (_data, _instance) => {
+exports.addNLP = async (_nlp, _ner, _instance) => {
 	let useData = [
 		'Basic',
 		{ "className": "BuiltinMicrosoft", "name": "extract-builtin-??", "path": "@nlpjs/builtin-microsoft" },
@@ -13,19 +13,34 @@ exports.addNLP = async (_data, _instance) => {
 	
 	const _dock = await dock.createContainer(_instance.id, {
 		use:  useData,
-		log: false,
 		settings: {
 			nlp: {
-				log: false,
+				trainByDomain: false
 			},
-		},
+			"nlu-??": {
+				log: false,
+			}
+		}
 	});
 	
 	const nlp = _dock.get('nlp');
-	for (let i = 0; i < _data.length; i++) {
-		await this.addNLPCorpus(nlp, _data[i].data())
+	
+	let fullNLPData = [..._nlp._nlpData, ..._nlp._nlpShared]
+	for (let i = 0; i < fullNLPData.length; i++) {
+		await this.addNLPCorpus(nlp, fullNLPData[i].data())
 	}
 	
+	let fullNERData = [..._ner._nerData, ..._ner._nerShared]
+	for (let i = 0; i < fullNERData.length; i++) {
+		let usableData = fullNERData[i].data()
+		if (usableData.data) {
+			for (let j = 0; j < usableData.data.length; j++) {
+				await nlp.addNerRuleOptionTexts(usableData.locals, usableData.name, usableData.data[j].outputs, usableData.data[j].inputs);
+			}
+		}
+	}
+	
+	// await nlp.slotManager.addSlot('command.weather', 'location', true, { en: 'For which location?' })
 	await this.trainNLP(nlp)
 	
 	console.log(`[${_instance.id}] NlpManager: Epochs loaded.`)

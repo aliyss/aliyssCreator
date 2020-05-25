@@ -56,7 +56,10 @@ class Instance {
 	addNLP = async () => {
 		if (!this.nlp) {
 			let _nlpData = await this.database.getData(this.db_init.folder + "nlpData/default")
-			return nlpManager.addNLP(_nlpData, this)
+			let _nlpShared = await this.database.getData("\\instances\\" + "nlpData/default")
+			let _nerData = await this.database.getData(this.db_init.folder + "nerData/default")
+			let _nerShared = await this.database.getData("\\instances\\" + "nerData/default")
+			return nlpManager.addNLP({ _nlpData, _nlpShared }, { _nerData, _nerShared }, this)
 		}
 	}
 
@@ -153,6 +156,7 @@ class Instance {
 			let errors = []
 			for (let [key, value] of Object.entries(this.users)) {
 				delete value.author;
+				delete value.avatarUrl;
 				_path = `layout/users/${value.id}`
 				_data = JSON.parse(JSON.stringify(value))
 				try {
