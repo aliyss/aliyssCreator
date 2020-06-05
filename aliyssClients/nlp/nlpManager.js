@@ -35,7 +35,7 @@ exports.addNLP = async (_nlp, _ner, _instance) => {
 		let usableData = fullNERData[i].data()
 		if (usableData.data) {
 			for (let j = 0; j < usableData.data.length; j++) {
-				await nlp.addNerRuleOptionTexts(usableData.locals, usableData.name, usableData.data[j].outputs, usableData.data[j].inputs);
+				await nlp.addNerRuleOptionTexts(usableData.locals, usableData.name, usableData.data[j].output, usableData.data[j].input);
 			}
 		}
 	}
